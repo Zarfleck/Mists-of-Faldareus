@@ -1,4 +1,7 @@
 <%- include("templates/header") %> 
-    <h1>Success!</h1>
-    <div><%= message %> </div>
-<%- include("templates/footer") %> 
+<div class="max-w-md mx-auto bg-panel/80 border border-white/10 rounded-xl p-6 sm:p-8 shadow-lg shadow-black/40 text-center">
+    <h1 class="font-display text-2xl text-gilt">Success</h1>
+    <p class="text-parchment mt-2"><%= message %></p>
+    <a href="/" class="inline-block mt-6 text-gilt hover:text-gilt/80 underline">Return home</a>
+</div>
+<%- include("templates/footer") %>

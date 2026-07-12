@@ -40,6 +40,15 @@ app.use(session({
 ));
 
 
+// Expose session state to every view (powers the shared nav bar)
+app.use((req, res, next) => {
+    res.locals.authenticated = req.session.authenticated || false;
+    res.locals.username = req.session.username || null;
+    res.locals.user_type = req.session.user_type || null;
+    next();
+});
+
+
 app.get('/', (req,res) => {
     console.log(req.session.username)
     res.render("index.ejs", {authenticated: req.session.authenticated, username: req.session.username});

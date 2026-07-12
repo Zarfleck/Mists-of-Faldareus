@@ -1,8 +1,14 @@
 <%- include("templates/header") %> 
-<ul>
-    <% let i=0; %>
-    <% for(i=0; i < users.length; i++) { %>
-    <%- include('user.ejs', {user: users[i]})  %> 
-    <% } %> 
-</ul>
+<div class="max-w-md mx-auto bg-panel/80 border border-white/10 rounded-xl p-6 sm:p-8 shadow-lg shadow-black/40">
+    <h1 class="font-display text-2xl text-parchment mb-2">Account Created</h1>
+    <p class="text-mist mb-6">Registered members:</p>
+    <ul class="flex flex-col gap-2">
+        <% for(var i=0; i < users.length; i++) { %>
+            <%- include('user.ejs', {user: users[i]}) %> 
+        <% } %> 
+    </ul>
+    <div class="mt-6">
+        <a href="/login" class="text-gilt hover:text-gilt/80 underline">Continue to login</a>
+    </div>
+</div>
 <%- include("templates/footer") %>

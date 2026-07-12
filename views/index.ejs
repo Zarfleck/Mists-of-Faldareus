@@ -1,22 +1,23 @@
 <%- include("templates/header") %> 
-<div class="flex justify-center mb-4">
-    <a href="/notes" class="p-2 bg-green-200 border border-black rounded-md shadow-md shadow-black">Browse Campaign Notes</a>
-</div>
-<% if(authenticated == true) { %>
-    <div class="flex justify-center">
-        <div class="flex-col mx-2 bg-green-200 p-2 rounded-md shadow-md shadow-black">
-            Hello, <%= username %>
-            <button class="flex mt-4 mb-2 p-1 border border-black bg-white"><a href="/members">Go to Members Area</a></button>
-            <button class="flex p-1 border border-black bg-white"><a href="/logout">Logout</a></button>
-        </div>
+<section class="text-center py-10 sm:py-16">
+    <h1 class="font-display text-4xl sm:text-6xl tracking-wide text-parchment drop-shadow-[0_2px_12px_rgba(139,26,26,0.5)]">
+        The Mists of Faldareus
+    </h1>
+    <p class="mt-4 text-mist text-lg max-w-2xl mx-auto">
+        A chronicle of the shrouded realm &mdash; its cities, its monsters, and the souls the Mist has claimed.
+    </p>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href="/notes" class="px-6 py-3 rounded-md bg-blood hover:bg-bloodhover text-parchment font-display tracking-wide transition-colors shadow-lg shadow-black/40">
+            Enter the Archive
+        </a>
+        <% if (!authenticated) { %>
+            <a href="/login" class="px-6 py-3 rounded-md border border-white/15 text-mist hover:text-parchment hover:bg-white/5 transition-colors">
+                Login
+            </a>
+        <% } %>
     </div>
-    
-<% }else { %>
-    <div class="flex justify-center">
-        <div class="flex-col bg-green-200 p-4 rounded-md shadow-md shadow-black">
-            <button class="flex mb-2 p-1 border border-black bg-white"><a href="/login">Login</a></button>
-            <button class="flex p-1 border border-black bg-white"><a href="/createuser">Sign Up</a></button>
-        </div>
-    </div>
-<% } %>
+    <% if (authenticated) { %>
+        <p class="mt-6 text-sm text-gilt/80">Welcome back, <%= username %>.</p>
+    <% } %>
+</section>
 <%- include("templates/footer") %>

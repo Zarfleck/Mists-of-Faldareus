@@ -4,12 +4,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= (typeof title !== 'undefined' && title) ? title + " \u00b7 The Mists of Faldareus" : "The Mists of Faldareus" %></title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: "#0a0a0d",
+                        panel: "#15131b",
+                        panel2: "#1d1a26",
+                        mist: "#9aa0b5",
+                        parchment: "#e7e2d6",
+                        blood: "#8b1a1a",
+                        bloodhover: "#a52121",
+                        gilt: "#c9a24b"
+                    },
+                    fontFamily: {
+                        display: ['Cinzel', 'serif'],
+                        body: ['"EB Garamond"', 'Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a0a0d;
+            background-image:
+                radial-gradient(1200px 600px at 50% -10%, rgba(139,26,26,0.20), transparent 60%),
+                radial-gradient(900px 500px at 100% 0%, rgba(80,90,130,0.12), transparent 55%),
+                linear-gradient(180deg, #0a0a0d 0%, #0c0b12 100%);
+            background-attachment: fixed;
+        }
+        .note-content { line-height: 1.75; color: #d8d3c6; }
+        .note-content h1, .note-content h2, .note-content h3 {
+            font-family: 'Cinzel', serif; color: #e7e2d6; margin: 1.2em 0 0.5em; line-height: 1.25;
+        }
+        .note-content h1 { font-size: 1.6rem; } 
+        .note-content h2 { font-size: 1.3rem; }
+        .note-content h3 { font-size: 1.1rem; }
+        .note-content p { margin: 0.75em 0; }
+        .note-content a { color: #c9a24b; text-decoration: underline; text-underline-offset: 2px; }
+        .note-content a:hover { color: #e3c072; }
+        .note-content ul { list-style: disc; margin: 0.75em 0; padding-left: 1.5em; }
+        .note-content ol { list-style: decimal; margin: 0.75em 0; padding-left: 1.5em; }
+        .note-content li { margin: 0.25em 0; }
+        .note-content blockquote { border-left: 3px solid #8b1a1a; padding-left: 1em; margin: 1em 0; color: #b9b3a4; font-style: italic; }
+        .note-content code { background: #1d1a26; padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+        .note-content pre { background: #1d1a26; padding: 1em; border-radius: 8px; overflow-x: auto; margin: 1em 0; }
+        .note-content table { border-collapse: collapse; margin: 1em 0; width: 100%; }
+        .note-content th, .note-content td { border: 1px solid #3a3548; padding: 0.5em 0.75em; text-align: left; }
+        .note-content img { max-width: 100%; border-radius: 8px; }
+    </style>
     <% if (locals.scripts) { %> 
         <% for(var i=0; i<scripts.length; i++) { %>
             <script src="<%= scripts[i]%>"></script>
         <% } %> 
     <% } %> 
 </head>
-<body>
+<body class="min-h-screen font-body text-parchment antialiased flex flex-col">
+    <nav class="border-b border-white/10 bg-ink/70 backdrop-blur sticky top-0 z-20">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="font-display text-lg sm:text-xl tracking-wide text-parchment hover:text-gilt transition-colors">
+                The Mists of Faldareus
+            </a>
+            <div class="flex items-center gap-1 sm:gap-2 text-sm">
+                <a href="/" class="px-3 py-2 rounded-md text-mist hover:text-parchment hover:bg-white/5 transition-colors">Home</a>
+                <a href="/notes" class="px-3 py-2 rounded-md text-mist hover:text-parchment hover:bg-white/5 transition-colors">Notes</a>
+                <% if (authenticated) { %>
+                    <span class="hidden sm:inline text-mist px-2">|</span>
+                    <span class="hidden sm:inline text-gilt/90"><%= username %></span>
+                    <a href="/logout" class="px-3 py-2 rounded-md bg-blood/80 hover:bg-bloodhover text-parchment transition-colors">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="px-3 py-2 rounded-md text-mist hover:text-parchment hover:bg-white/5 transition-colors">Login</a>
+                    <a href="/createUser" class="px-3 py-2 rounded-md bg-blood/80 hover:bg-bloodhover text-parchment transition-colors">Sign Up</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-8 sm:py-12">

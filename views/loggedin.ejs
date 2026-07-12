@@ -1,12 +1,16 @@
 <%- include("templates/header") %> 
-<div class="flex justify-center">
-    <div class="bg-green-200 p-2 rounded-md shadow-md shadow-black">
-        <div class="flex">Hello <%= username %></div>
-        <button class="flex p-1 border border-black bg-white"><a href="/logout">Logout</a></button>
+<div class="max-w-2xl mx-auto">
+    <div class="bg-panel/80 border border-white/10 rounded-xl p-6 shadow-lg shadow-black/40">
+        <h1 class="font-display text-2xl text-parchment">Members Area</h1>
+        <p class="text-mist mt-1">Hello <span class="text-gilt"><%= username %></span>.</p>
     </div>
-</div>
-<div class="flex grid grid-rows-3 md:grid-rows-1 grid-flow-col gap-4 mt-4 justify-items-center">
-    <div><img src='fluffy.gif' style='width:250px;'></div>
-    <div><img src='socks.gif' style='width:250px;'></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+        <div class="bg-panel/80 border border-white/10 rounded-xl p-3 flex justify-center">
+            <img src='/fluffy.gif' class="rounded-lg" style='width:250px;'>
+        </div>
+        <div class="bg-panel/80 border border-white/10 rounded-xl p-3 flex justify-center">
+            <img src='/socks.gif' class="rounded-lg" style='width:250px;'>
+        </div>
+    </div>
 </div>
 <%- include("templates/footer") %>

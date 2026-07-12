@@ -1,8 +1,17 @@
 <%- include("templates/header") %> 
-create user
-<form action='/submitUser' method='post'>
-<input name='username' type='text' placeholder='username'>
-<input name='password' type='password' placeholder='password'>
-<button>Submit</button>
-</form>
+<div class="max-w-md mx-auto bg-panel/80 border border-white/10 rounded-xl p-6 sm:p-8 shadow-lg shadow-black/40">
+    <h1 class="font-display text-2xl text-parchment mb-6">Create Account</h1>
+    <form action="/submitUser" method="post" class="flex flex-col gap-4">
+        <label class="flex flex-col gap-1">
+            <span class="text-sm text-mist">Username</span>
+            <input class="w-full bg-ink/60 border border-white/15 rounded-md px-3 py-2 text-parchment placeholder-mist/40 focus:outline-none focus:border-gilt" type="text" name="username" placeholder="username" required />
+        </label>
+        <label class="flex flex-col gap-1">
+            <span class="text-sm text-mist">Password</span>
+            <input class="w-full bg-ink/60 border border-white/15 rounded-md px-3 py-2 text-parchment placeholder-mist/40 focus:outline-none focus:border-gilt" type="password" name="password" placeholder="password" required />
+        </label>
+        <button class="mt-2 px-4 py-2 rounded-md bg-blood hover:bg-bloodhover text-parchment font-display tracking-wide transition-colors" type="submit">Sign Up</button>
+    </form>
+    <p class="mt-4 text-sm text-mist">Already have an account? <a href="/login" class="text-gilt hover:text-gilt/80 underline">Login</a>.</p>
+</div>
 <%- include("templates/footer") %>
