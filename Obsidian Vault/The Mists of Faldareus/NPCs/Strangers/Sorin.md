@@ -1,1 +1,0 @@
-Someone [[High Priest Luthor]] was talking to that Lady Miriel did not approve of

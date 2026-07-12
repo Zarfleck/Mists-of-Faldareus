@@ -1,0 +1,29 @@
+---
+description: Require explicit user confirmation before making any changes
+alwaysApply: true
+---
+
+# Confirm Before Making Changes
+
+Before modifying anything, follow this workflow:
+
+1. **Explain** what will change and why.
+2. **Show specifics**: the exact file(s) affected and a preview of the proposed edits (before/after or full new content).
+3. **Wait for explicit approval** before applying the change.
+
+This applies to:
+- Code edits, file creation, and deletion
+- Config/dependency changes (installs, `package.json`, env files)
+- State-changing commands (migrations, git commits, deployments)
+
+Read-only work needs no confirmation:
+- Reading, searching, and listing files
+- Answering questions and exploring the codebase
+
+If a request is ambiguous, describe the plan and ask before acting.
+
+# Re-running Programs
+
+Before starting/re-running a long-running program (dev server, watcher, etc.),
+first ensure any existing instance is killed and the port is free. Never test
+against a process that may be running stale code.

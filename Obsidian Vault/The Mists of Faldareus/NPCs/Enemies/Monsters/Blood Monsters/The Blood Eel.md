@@ -1,2 +1,0 @@
-
-Despite being called an eel, this creature almost resembles a centipede… probably. We think it has legs or tentacles, or maybe a large mouth. It’s hard to say. We’ve sent countless vessels into the underdark to explore the depths but each one that does come back damaged, or with no crew. For more access to these details, you must be given clearance by the Royal Family, or our primary research center near Fugue Gate.

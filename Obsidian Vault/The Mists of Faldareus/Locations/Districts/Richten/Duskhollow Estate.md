@@ -1,1 +1,0 @@
-Owned by [[Professor Duskhollow|Prof. Duskhollow]], probably a cemetery; haunted by a  banshee (may have been put to rest)
