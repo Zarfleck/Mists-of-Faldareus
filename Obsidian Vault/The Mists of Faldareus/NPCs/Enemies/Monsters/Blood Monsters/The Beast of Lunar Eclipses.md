@@ -1,0 +1,2 @@
+
+Don’t go fishing at night, don't set sail at night, avoid the shore at night. Don’t try to help survivors, ignore the screams of the doomed. Don’t touch the red water. When it hunts the moon vanishes and the sea turns to blood.

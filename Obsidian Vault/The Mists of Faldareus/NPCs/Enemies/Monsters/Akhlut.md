@@ -1,0 +1,2 @@
+
+This gorgeous yet terrifying beast appears to be a hybrid of an orca whale and shark. It lives in mountains and icy regions, and hunts both in water and land. It is relatively harmless if left alone, unless you encroach on its water based territory

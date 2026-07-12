@@ -1,0 +1,1 @@
+Was travelling with [[Xylax]] in the mines; also was a part of the “imaginary friend” stuff (papa)

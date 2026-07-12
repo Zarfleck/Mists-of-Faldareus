@@ -1,0 +1,19 @@
+<%- include("templates/header") %> 
+<div class="max-w-3xl mx-auto p-4">
+    <div class="mb-4">
+        <a href="/notes" class="text-blue-700 underline">&larr; All Notes</a>
+    </div>
+    <div class="flex items-center justify-between mb-1">
+        <h1 class="text-2xl font-bold"><%= note.title %></h1>
+        <% if (authenticated) { %>
+            <a href="/notes/edit/<%= note.note_id %>" class="p-2 bg-green-200 border border-black rounded-md shadow-md shadow-black">Edit</a>
+        <% } %>
+    </div>
+    <% if (note.folder) { %>
+        <div class="text-sm text-gray-500 mb-4"><%= note.folder %></div>
+    <% } %>
+    <article class="prose max-w-none">
+        <%- html %>
+    </article>
+</div>
+<%- include("templates/footer") %>

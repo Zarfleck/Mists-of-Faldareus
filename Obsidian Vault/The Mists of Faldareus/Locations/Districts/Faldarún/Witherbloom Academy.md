@@ -1,0 +1,1 @@
+One of the Strixhaven Schools, located in the swamp: Specialises in potions, brews, assassination; A professor there has been accused by another professor of being aggressive and causing problems

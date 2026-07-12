@@ -1,0 +1,5 @@
+
+Blood Elementals have been known to swallow people whole. They have been seen rarely, but the documentation is quite thorough given the vampire nations' curiosities about creatures made of “food.” They can appear as just normal pools of blood, but tend to try and blend in when possible. After large battles or executions blood elementals will sometimes flow into the heaps of corpses to dissolve them. Feasting on flesh and adding the blood to its mass. There are also occasions of these elementals hiding in pits where bodies are discarded, or in areas where cults reside so they may “pose” as a religious entity. They are very deadly especially as they grow in size, however they don't often engage creatures and instead wait for their food to fall into them *(or be dead already)*.
+
+Their combat prowess or abilities aren’t known given the rarity and passive nature. All that is known is no one has fought one and lived to hear the tale *(There are 0 documented cases of people fighting this, it seems the author wanted to hype this beast up however)*
+

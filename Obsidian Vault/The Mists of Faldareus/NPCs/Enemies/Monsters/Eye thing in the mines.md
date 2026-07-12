@@ -1,0 +1,1 @@
+Big eye in Sorrow Lake in the mines; Turned to stone to heal itself; Seemed to aim for the eyes of a target (tentacle thing)

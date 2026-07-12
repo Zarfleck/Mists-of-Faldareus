@@ -1,0 +1,8 @@
+- Ranger/paladin hybrid monster hunter with a wolf companion
+- Known to have been travelling with [[Xylax]]
+- Paladin of [[Miriel Faldareus|Miriel]], but known to be masquerading as an oathbreaker
+- Allegedly had the idea to petrify residents of [[Kinnistrahd City|Kinnistrahd]] to delay ceremorphosis
+- Received a letter like ours
+- Allegedly, his father is here, and [[Lolth]] has him so [[Miriel Faldareus|Miriel]] can not save him
+- According to a letter to [[Dearil]], he underwent some sort of transformation (werewolf?), and [[Miriel Faldareus|Miriel]] has a plan for him
+- Thought [[Emiril|Emeril]] (imprisoned) was [[Miriel Faldareus|Miriel]], broke her out

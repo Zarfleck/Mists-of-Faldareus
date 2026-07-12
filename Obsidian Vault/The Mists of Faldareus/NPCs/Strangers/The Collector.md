@@ -1,0 +1,1 @@
+Operates the weird giant factory thing between [[Faldarún City]] and [[Kinnistrahd City]]; creates machines operated by flesh
