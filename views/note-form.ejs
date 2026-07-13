@@ -1,6 +1,20 @@
 <%- include("templates/header") %> 
+<%
+    var folderList = (typeof folders !== 'undefined' && folders) ? folders.slice() : [];
+    var currentFolder = (note.folder || "").trim();
+    var isKnownFolder = !currentFolder || folderList.indexOf(currentFolder) !== -1;
+    if (currentFolder && !isKnownFolder) {
+        folderList.push(currentFolder);
+        folderList.sort();
+        isKnownFolder = true;
+    }
+    var useOther = false;
+%>
 <div class="max-w-3xl mx-auto">
-    <a href="/notes" class="text-mist hover:text-parchment text-sm transition-colors">&larr; All Notes</a>
+    <a href="<%= note.folder ? '/notes?path=' + encodeURIComponent(note.folder) : '/notes' %>"
+       class="inline-flex items-center px-4 py-2 rounded-md border border-white/15 bg-panel/70 text-mist hover:text-parchment hover:bg-white/5 transition-colors font-display tracking-wide">
+        &larr; Back
+    </a>
 
     <div class="mt-4 bg-panel/70 border border-white/10 rounded-xl p-6 sm:p-8 shadow-lg shadow-black/40">
         <h1 class="font-display text-2xl text-parchment mb-6"><%= heading %></h1>
@@ -11,7 +25,14 @@
             </label>
             <label class="flex flex-col gap-1">
                 <span class="text-sm text-mist">Folder</span>
-                <input class="w-full bg-ink/60 border border-white/15 rounded-md px-3 py-2 text-parchment placeholder-mist/40 focus:outline-none focus:border-gilt" type="text" name="folder" value="<%= note.folder %>" placeholder="e.g. NPCs/Strangers">
+                <select id="folder-select" name="folder" class="w-full bg-ink/60 border border-white/15 rounded-md px-3 py-2 text-parchment focus:outline-none focus:border-gilt" style="color-scheme: dark;">
+                    <option value="" class="bg-ink text-parchment" <%= !currentFolder ? "selected" : "" %>>(none)</option>
+                    <% folderList.forEach(function(folder) { %>
+                        <option value="<%= folder %>" class="bg-ink text-parchment" <%= currentFolder === folder ? "selected" : "" %>><%= folder %></option>
+                    <% }); %>
+                    <option value="__other__" class="bg-ink text-parchment" <%= useOther ? "selected" : "" %>>Other…</option>
+                </select>
+                <input id="folder-other" class="<%= useOther ? '' : 'hidden ' %>mt-2 w-full bg-ink/60 border border-white/15 rounded-md px-3 py-2 text-parchment placeholder-mist/40 focus:outline-none focus:border-gilt" type="text" name="folder_other" value="" placeholder="e.g. NPCs/Strangers">
             </label>
             <label class="flex flex-col gap-1">
                 <span class="text-sm text-mist">Content <span class="text-mist/60">(Markdown &mdash; use [[Note Title]] to link)</span></span>
@@ -24,4 +45,18 @@
         </form>
     </div>
 </div>
+<script>
+(function () {
+    var select = document.getElementById('folder-select');
+    var other = document.getElementById('folder-other');
+    if (!select || !other) return;
+    function sync() {
+        var isOther = select.value === '__other__';
+        other.classList.toggle('hidden', !isOther);
+        if (isOther) other.focus();
+    }
+    select.addEventListener('change', sync);
+    sync();
+})();
+</script>
 <%- include("templates/footer") %>
