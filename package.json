@@ -10,14 +10,14 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.110.2",
     "bcrypt": "^6.0.0",
-    "connect-pg-simple": "^10.0.0",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "gray-matter": "^4.0.3",
     "marked": "^18.0.6",
-    "pg": "^8.22.0",
+    "mongodb": "^6.21.0",
     "sanitize-html": "^2.17.6"
   }
 }
