@@ -64,29 +64,6 @@ app.get('/', (req,res) => {
     res.render("index.ejs", {authenticated: req.session.authenticated, username: req.session.username});
 });
 
-
-app.get("/about", (req, res) => {
-    var color = req.query.color;
-    if (!color) {
-        color = "black";
-    }
-
-    res.render("about.ejs");
-});
-
-
-app.get('/cat/:id', (req,res) => {
-    var cat = req.params.id;
-    res.render("cat", {cat: cat});
-});
-
-
-app.get('/contact', (req,res) => {
-    var missingEmail = req.query.missing;
-    res.render("contact", {missing: missingEmail});
-});
-
-
 app.post('/submitEmail', (req,res) => {
     var email = req.body.email;
     if (!email) {
@@ -117,12 +94,9 @@ app.post('/submitUser', async (req,res) => {
     }
 });
 
-
-
 app.get('/login', (req,res) => {
     res.render("login");
 });
-
 
 app.post('/loggingin', async (req,res) => {
     var username = req.body.username;
@@ -198,30 +172,78 @@ function sessionValidation(req, res, next) {
 
 /* ===== Notes (campaign vault) ===== */
 
-// Browse all notes, grouped by folder
+async function getFolderList() {
+    var notes = await db_notes.getAllNotes();
+    if (!notes) return [];
+    var set = {};
+    for (var i = 0; i < notes.length; i++) {
+        var f = (notes[i].folder || "").trim();
+        if (f) set[f] = true;
+    }
+    return Object.keys(set).sort();
+}
+
+function resolveFolder(body) {
+    var folder = (body.folder || "").trim();
+    if (folder === "__other__") {
+        return (body.folder_other || "").trim();
+    }
+    return folder;
+}
+
+// Browse notes by folder path (?path=NPCs/Strangers)
 app.get('/notes', async (req, res) => {
     var notes = await db_notes.getAllNotes();
     if (!notes) {
         res.status(500).render("errorMessage", {error: "Could not load notes."});
         return;
     }
-    var grouped = {};
+
+    var currentPath = (req.query.path || "").trim().replace(/^\/+|\/+$/g, "");
+    var prefix = currentPath ? currentPath + "/" : "";
+    var subfolders = {};
+    var currentNotes = [];
+
     for (var i = 0; i < notes.length; i++) {
-        var folder = notes[i].folder || "(root)";
-        if (!grouped[folder]) grouped[folder] = [];
-        grouped[folder].push(notes[i]);
+        var folder = (notes[i].folder || "").trim();
+        if (!currentPath) {
+            if (!folder) {
+                currentNotes.push(notes[i]);
+            } else {
+                var top = folder.split("/")[0];
+                subfolders[top] = true;
+            }
+        } else if (folder === currentPath) {
+            currentNotes.push(notes[i]);
+        } else if (folder.indexOf(prefix) === 0) {
+            var rest = folder.slice(prefix.length);
+            var next = rest.split("/")[0];
+            if (next) subfolders[next] = true;
+        }
     }
+
+    var parentPath = "";
+    if (currentPath) {
+        var parts = currentPath.split("/");
+        parts.pop();
+        parentPath = parts.join("/");
+    }
+
     res.render("notes-index", {
-        grouped: grouped,
+        currentPath: currentPath,
+        parentPath: parentPath,
+        subfolders: Object.keys(subfolders).sort(),
+        notes: currentNotes,
         authenticated: req.session.authenticated,
         username: req.session.username
     });
 });
 
 // New-note form
-app.get('/notes/new', sessionValidation, (req, res) => {
+app.get('/notes/new', sessionValidation, async (req, res) => {
     res.render("note-form", {
         note: { note_id: null, title: req.query.title || "", folder: req.query.folder || "", content: "" },
+        folders: await getFolderList(),
         action: "/notes",
         heading: "New Note"
     });
@@ -236,7 +258,7 @@ app.post('/notes', sessionValidation, async (req, res) => {
     }
     var id = await db_notes.createNote({
         title: title,
-        folder: (req.body.folder || "").trim(),
+        folder: resolveFolder(req.body),
         content: req.body.content || "",
         userId: req.session.user_id
     });
@@ -273,6 +295,7 @@ app.get('/notes/edit/:id', sessionValidation, async (req, res) => {
     }
     res.render("note-form", {
         note: note,
+        folders: await getFolderList(),
         action: "/notes/" + note.note_id,
         heading: "Edit Note"
     });
@@ -287,7 +310,7 @@ app.post('/notes/:id', sessionValidation, async (req, res) => {
     }
     var ok = await db_notes.updateNote(req.params.id, {
         title: title,
-        folder: (req.body.folder || "").trim(),
+        folder: resolveFolder(req.body),
         content: req.body.content || "",
         userId: req.session.user_id
     });

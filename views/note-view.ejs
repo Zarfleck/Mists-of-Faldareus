@@ -1,6 +1,9 @@
 <%- include("templates/header") %> 
 <div class="max-w-3xl mx-auto">
-    <a href="/notes" class="text-mist hover:text-parchment text-sm transition-colors">&larr; All Notes</a>
+    <a href="<%= note.folder ? '/notes?path=' + encodeURIComponent(note.folder) : '/notes' %>"
+       class="inline-flex items-center px-4 py-2 rounded-md border border-white/15 bg-panel/70 text-mist hover:text-parchment hover:bg-white/5 transition-colors font-display tracking-wide">
+        &larr; Back
+    </a>
 
     <article class="mt-4 bg-panel/70 border border-white/10 rounded-xl p-6 sm:p-8 shadow-lg shadow-black/40">
         <div class="flex items-start justify-between gap-4 border-b border-white/10 pb-4 mb-6">
@@ -14,7 +17,7 @@
                 <a href="/notes/edit/<%= note.note_id %>" class="shrink-0 px-4 py-2 rounded-md border border-white/15 text-mist hover:text-parchment hover:bg-white/5 transition-colors">Edit</a>
             <% } %>
         </div>
-        <div class="note-content">
+        <div class="note-content text-2xl">
             <%- html %>
         </div>
     </article>

@@ -68,16 +68,16 @@
 </head>
 <body class="min-h-screen font-body text-parchment antialiased flex flex-col">
     <nav class="border-b border-white/10 bg-ink/70 backdrop-blur sticky top-0 z-20">
-        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="/" class="font-display text-lg sm:text-xl tracking-wide text-parchment hover:text-gilt transition-colors">
+        <div class="max-w-5xl mx-auto px-4 h-20 flex items-center justify-between">
+            <a href="/" class="font-display text-xl sm:text-2xl tracking-wide text-parchment hover:text-gilt transition-colors">
                 The Mists of Faldareus
             </a>
-            <div class="flex items-center gap-1 sm:gap-2 text-sm">
+            <div class="flex items-center gap-1 sm:gap-2 text-base text-lg">
                 <a href="/" class="px-3 py-2 rounded-md text-mist hover:text-parchment hover:bg-white/5 transition-colors">Home</a>
                 <a href="/notes" class="px-3 py-2 rounded-md text-mist hover:text-parchment hover:bg-white/5 transition-colors">Notes</a>
                 <% if (authenticated) { %>
                     <span class="hidden sm:inline text-mist px-2">|</span>
-                    <span class="hidden sm:inline text-gilt/90"><%= username %></span>
+                    <span class="hidden sm:inline text-gilt/90 mr-4"><%= username %></span>
                     <a href="/logout" class="px-3 py-2 rounded-md bg-blood/80 hover:bg-bloodhover text-parchment transition-colors">Logout</a>
                 <% } else { %>
                     <a href="/login" class="px-3 py-2 rounded-md text-mist hover:text-parchment hover:bg-white/5 transition-colors">Login</a>

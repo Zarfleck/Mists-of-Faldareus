@@ -2,30 +2,43 @@
 <div class="flex items-center justify-between mb-8">
     <div>
         <h1 class="font-display text-3xl text-parchment">Campaign Notes</h1>
-        <p class="text-mist text-sm mt-1">The archive of Faldareus.</p>
+        <p class="text-mist text-xl mt-1">The archive of Faldareus.</p>
     </div>
     <% if (authenticated) { %>
         <a href="/notes/new" class="px-4 py-2 rounded-md bg-blood hover:bg-bloodhover text-parchment font-display tracking-wide transition-colors shadow-lg shadow-black/40">+ New Note</a>
     <% } %>
 </div>
 
-<% var folders = Object.keys(grouped).sort(); %>
-<% if (folders.length === 0) { %>
-    <p class="text-mist">No notes yet.</p>
+<% if (currentPath) { %>
+    <div class="grid grid-cols-3 items-center mb-6">
+        <div>
+            <a href="<%= parentPath ? '/notes?path=' + encodeURIComponent(parentPath) : '/notes' %>"
+               class="inline-flex items-center px-4 py-2 rounded-md border border-white/15 bg-panel/70 text-mist hover:text-parchment hover:bg-white/5 transition-colors font-display tracking-wide">
+                &larr; Back
+            </a>
+        </div>
+        <p class="text-center text-gilt/90 text-xl uppercase tracking-widest"><%= currentPath %></p>
+        <div></div>
+    </div>
 <% } %>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-    <% folders.forEach(function(folder) { %>
-        <section class="bg-panel/70 border border-white/10 rounded-xl p-5 shadow-lg shadow-black/30">
-            <h2 class="font-display text-sm uppercase tracking-widest text-gilt/90 border-b border-white/10 pb-2 mb-3"><%= folder %></h2>
-            <ul class="flex flex-col gap-1.5">
-                <% grouped[folder].forEach(function(note) { %>
-                    <li>
-                        <a class="text-parchment hover:text-gilt transition-colors" href="/notes/view/<%= note.note_id %>"><%= note.title %></a>
-                    </li>
-                <% }); %>
-            </ul>
-        </section>
-    <% }); %>
-</div>
+<% if (subfolders.length === 0 && notes.length === 0) { %>
+    <p class="text-mist">No notes yet.</p>
+<% } else { %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <% subfolders.forEach(function(name) { %>
+            <% var folderPath = currentPath ? currentPath + "/" + name : name; %>
+            <a href="/notes?path=<%= encodeURIComponent(folderPath) %>"
+               class="block px-5 py-4 rounded-xl bg-panel/70 border border-white/10 text-lg text-parchment hover:border-gilt/50 hover:text-gilt transition-colors shadow-lg shadow-black/30 font-display tracking-wide">
+                <%= name %>
+            </a>
+        <% }); %>
+        <% notes.forEach(function(note) { %>
+            <a href="/notes/view/<%= note.note_id %>"
+               class="block px-5 py-4 rounded-xl bg-panel/70 border border-white/10 text-lg text-parchment hover:border-gilt/50 hover:text-gilt transition-colors shadow-lg shadow-black/30">
+                <%= note.title %>
+            </a>
+        <% }); %>
+    </div>
+<% } %>
 <%- include("templates/footer") %>
